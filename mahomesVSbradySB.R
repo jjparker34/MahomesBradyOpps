@@ -185,23 +185,23 @@ sb_epa <- sb_epa %>%
   left_join(team_logos, by = "Opponent")
 sb_epa <- sb_epa %>%
   mutate(
-    Outline_Color = ifelse(QB == "Mahomes", "red", "black"),  # Red outline for Mahomes
-    Year_Color = ifelse(QB == "Mahomes", "red", "blue")  # Red year for Mahomes, Blue for Brady
+    Outline_Color = ifelse(QB == "Mahomes", "red", "black"),  
+    Year_Color = ifelse(QB == "Mahomes", "red", "blue")  
   )
 
 ggplot(sb_epa, aes(x = Offensive_EPA, y = Defensive_EPA)) +
-  geom_image(aes(image = Logo_URL.x), size = .15) +  # Plot team logos
-  geom_text(aes(label = Year, color = QB), vjust = 1.2, hjust = -1, size = 2.5, weight = 2) +  # Add year labels above logos
+  geom_image(aes(image = Logo_URL.x), size = .15) +  
+  geom_text(aes(label = Year, color = QB), vjust = 1.2, hjust = -1, size = 2.5, weight = 2) +  
   theme_minimal() +
   labs(title = "Super Bowl Opponents' EPA: Mahomes vs. Brady",
        subtitle = subtitle_text,
        x = "Offensive EPA",
        y = "Defensive EPA") +
-  scale_y_reverse() +  # Invert Y-axis so stronger defenses appear higher
-  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +  # Zero line for offense
+  scale_y_reverse() +  
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") + 
   geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
   xlim(-60, 270) + ylim(150, -170) +
-  scale_color_manual(values = c("Mahomes" = "red", "Brady" = "blue")) +  # Custom colors
+  scale_color_manual(values = c("Mahomes" = "red", "Brady" = "blue")) + 
   theme(
-    plot.subtitle = element_text(size = 7, face = "italic", color = "gray1")  # Change subtitle style
+    plot.subtitle = element_text(size = 7, face = "italic", color = "gray1")  
   )
